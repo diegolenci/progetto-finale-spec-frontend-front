@@ -1,3 +1,4 @@
+// import dei componenti React e React Router
 import CompareView from "./assets/CompareView";
 import ProductCard from "./assets/ProductCard";
 import ProductList from "./assets/ProductList"
@@ -5,6 +6,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import WishList from "./assets/WishList";
 
 function App() {
+  // gestione delle rotte
   return (
     <Router>
       <Routes>

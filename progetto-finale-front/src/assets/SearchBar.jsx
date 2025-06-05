@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 export default function SearchBar({ onSearch, notFound }) {
+  
   const [query, setQuery] = useState("");
   // Funzione per gestire il cambiamento del campo di input
   const handleChange = (e) => {

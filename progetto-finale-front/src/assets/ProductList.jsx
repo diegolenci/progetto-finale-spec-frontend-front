@@ -5,7 +5,7 @@ import FilterBar from './FilterBar';
 import AlfabeticFilter from './AlfabeticFilter';
 
 export default function ProductList() {
-
+// Stato per la lista dei prodotti
 const [products, setProducts] = useState([]);
     // Effettua una richiesta per ottenere la lista dei prodotti
     useEffect(() => {
@@ -16,16 +16,16 @@ const [products, setProducts] = useState([]);
 
 // Stato per la query di ricerca
 const [searchQuery, setSearchQuery] = useState("");
-
-
+// Stato per la categoria selezionata
 const [selectedCategory, setSelectedCategory] = useState("");
 const categories = Array.from(new Set(products.map(p => p.category)));
-
+// Metodo filter per ottenere i prodotti che corrispondono alla ricerca e alla categoria
 const filteredProducts = products.filter(product =>
   product.title.toLowerCase().includes(searchQuery.toLowerCase()) &&
+  // Filtra per categoria se è selezionata
   (selectedCategory === "" || product.category === selectedCategory)
 );
-
+// Controlla se non ci sono prodotti filtrati e se la query di ricerca non è vuota
 const notFound = filteredProducts.length === 0 && searchQuery !== "";
 
   

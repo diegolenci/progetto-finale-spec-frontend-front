@@ -2,13 +2,14 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const WishList = () => {
+  // Stato per i prodotti, gli ID dei preferiti e l'ID selezionato
   const [products, setProducts] = useState([]);
   const [favoriteIds, setFavoriteIds] = useState([]);
   const [selectedId, setSelectedId] = useState("");
 
   const navigate = useNavigate();
 
-  // Carica i prodotti reali dal backend
+  // Carica dal backend
   useEffect(() => {
     fetch("http://localhost:3001/products")
       .then(res => res.json())
