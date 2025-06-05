@@ -60,3 +60,81 @@ strong {
 .back-button:hover {
   background-color: #1769aa;
 }
+
+
+/*bottone torna alla lista del comparatore */
+.bottone-azzurro {
+  margin: 2rem;
+  background-color: #2196f3;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 0.7rem 2rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.bottone-azzurro:hover {
+  background-color: #1769aa;
+}
+
+
+/*bottone "vai al comparatore"*/
+.bottone-comparatore {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 8px 16px;
+  cursor: pointer;
+  position: absolute;
+  top: 70px;
+  right: 20px;
+  font-size: 1rem;
+  transition: background 0.2s;
+}
+@media (max-width: 450px) {
+  .bottone-comparatore {
+    top: 170px;
+    left: 10px;
+    width: 50%;
+    padding: 5px;
+    margin-left: 10px;
+  }
+}
+
+.search-filter-container {
+  display: flex;
+  justify-content: flex-start;
+}
+/*bottone preferiti*/
+.bottone-preferiti{
+  background-color: #3437c7;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 8px 16px;
+  cursor: pointer;
+  position: absolute;
+  top: 120px;
+  right: 20px;
+  font-size: 1rem;
+  transition: background 0.2s;
+}
+
+/*bottoni ordine alfabetico*/
+.alfabetic-filter{
+  padding: 5px;
+  margin-left: 10px;
+}
+.alfabetic-filter .a-z {
+  margin-right: 10px;
+}
+.a-z{
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  padding: 5px;
+  cursor: pointer;
+  transition: background 0.2s;
+}

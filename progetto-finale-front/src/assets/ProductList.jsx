@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import SearchBar from './SearchBar';
 import FilterBar from './FilterBar';
+import AlfabeticFilter from './AlfabeticFilter';
 
 export default function ProductList() {
 
@@ -25,19 +26,27 @@ const filteredProducts = products.filter(product =>
   (selectedCategory === "" || product.category === selectedCategory)
 );
 
+const notFound = filteredProducts.length === 0 && searchQuery !== "";
 
   
 return (
     <>
       <h2>Lista prodotti</h2>
-        <SearchBar onSearch={setSearchQuery} />
-        <FilterBar categories={categories} onFilter={setSelectedCategory} />
+          <FilterBar categories={categories} onFilter={setSelectedCategory} />
+          <SearchBar onSearch={setSearchQuery} notFound={notFound}/>
+          <AlfabeticFilter productList={filteredProducts} setProductList={setProducts} />
+          <Link to="/compare">
+            <button className='bottone-comparatore'>Vai al comparatore</button>
+          </Link>
+          <Link to="/wishlist">
+            <button className='bottone-preferiti'>Preferiti</button>
+          </Link>
       <ul>
         {filteredProducts.map(product => (
           <li key={product.id}>
             <strong>
                 <Link to={`/products/${product.id}`} className="product-title-link">{product.title}</Link>
-            </strong> - {product.brand} ({product.category})
+            </strong> - ({product.category})
           </li>
         ))}
       </ul>
