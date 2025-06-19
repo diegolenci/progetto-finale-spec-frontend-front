@@ -2,9 +2,15 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const WishList = () => {
-  // Stato per i prodotti, gli ID dei preferiti e l'ID selezionato
+  // Stato per i prodotti
   const [products, setProducts] = useState([]);
-  const [favoriteIds, setFavoriteIds] = useState([]);
+  // Stato per gli ID dei preferiti
+  const [favoriteIds, setFavoriteIds] = useState(() => {
+    // Inizializza gli ID dei preferiti dal localStorage
+    const stored = localStorage.getItem("favoriteIds");
+    return stored ? JSON.parse(stored).map(Number) : [];
+    });
+  // Stato per il prodotto selezionato
   const [selectedId, setSelectedId] = useState("");
 
   const navigate = useNavigate();
@@ -13,10 +19,19 @@ const WishList = () => {
   useEffect(() => {
     fetch("http://localhost:3001/products")
       .then(res => res.json())
-      .then(data => setProducts(data));
+      .then(data => {
+        setProducts(data);
+      console.log("Prodotti caricati:", data);
+      });
   }, []);
 
 
+  // Salva i preferiti nel localStorage ogni volta che cambiano
+  useEffect(() => {
+    localStorage.setItem("favoriteIds", JSON.stringify(favoriteIds));
+  }, [favoriteIds]);
+
+  
   // Aggiungi prodotto selezionato alla wishlist
   const addToWishList = () => {
     if (selectedId && !favoriteIds.includes(Number(selectedId))) {
@@ -26,11 +41,11 @@ const WishList = () => {
 
   // Rimuovi prodotto dalla wishlist
   const removeFromWishList = (productId) => {
-    setFavoriteIds(favoriteIds.filter((id) => id !== productId));
+    setFavoriteIds(favoriteIds.filter((id) => id !== Number(productId)));
   };
 
   // Ricostruisci la lista dei prodotti preferiti
-  const favorites = products.filter(p => favoriteIds.includes(p.id));
+  const favorites = products.filter(p => favoriteIds.includes(Number(p.id)));
 
   return (
     <div>
@@ -43,7 +58,7 @@ const WishList = () => {
         >
           <option value="">Seleziona un prodotto...</option>
           {products
-            .filter(p => !favoriteIds.includes(p.id))
+            .filter(p => !favoriteIds.includes(Number(p.id)))
             .map(product => (
               <option key={product.id} value={product.id}>
                 {product.title}

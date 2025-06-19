@@ -1,12 +1,21 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function SearchBar({ onSearch, notFound }) {
   
+  // Stato per gestire la query di ricerca
   const [query, setQuery] = useState("");
-  // Funzione per gestire il cambiamento del campo di input
+
+  // Debounce
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      onSearch(query);
+    }, 400);
+    return () => clearTimeout(handler);
+  }, [query, onSearch]);
+
+  // Gestione del cambiamento dell'input 
   const handleChange = (e) => {
     setQuery(e.target.value);
-    onSearch(e.target.value);
   };
 
   return (
